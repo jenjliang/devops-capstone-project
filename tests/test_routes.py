@@ -25,6 +25,7 @@ HTTPS_ENVIRON = {'wsgi.url_scheme': 'https'}
 ######################################################################
 #  T E S T   C A S E S
 ######################################################################
+
 class TestAccountService(TestCase):
     """Account Service Tests"""
 
@@ -148,7 +149,7 @@ class TestAccountService(TestCase):
 
     def test_account_not_found(self):
         """It should not read an account that is not found"""
-        resp = self.client.get(f"BASE_URL/0")
+        resp = self.client.get("BASE_URL/0")
         self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_update_an_account(self):
@@ -180,7 +181,7 @@ class TestAccountService(TestCase):
         """It should not allow an illegal method"""
         resp = self.client.delete(BASE_URL)
         self.assertEqual(resp.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
-    
+
     def test_security_headers(self):
         """It should return security headers"""
         resp = self.client.get('/', environ_overrides=HTTPS_ENVIRON)
